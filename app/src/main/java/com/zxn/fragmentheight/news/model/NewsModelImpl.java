@@ -22,6 +22,7 @@ public class NewsModelImpl implements INewsModel {
             mPresenter.onLoadData(data);
         }
     };
+    private boolean isDropDown;
     ;
 
     public NewsModelImpl(INewsPresenter presenter) {
@@ -30,14 +31,15 @@ public class NewsModelImpl implements INewsModel {
     }
 
     @Override
-    public void loadData(final int page) {
-//      http://www.qubaobei.com/ios/cf/dish_list.php?stage_id=1&limit=10&page=1
+    public void loadData(final int index) {
+        //      http://www.qubaobei.com/ios/cf/dish_list.php?stage_id=1&limit=10&page=1
+        this.isDropDown = isDropDown;
         x.http().get(new RequestParams() {
             {
                 setUri("http://www.qubaobei.com/ios/cf/dish_list.php");
                 addParameter("stage_id", "1");
-                addParameter("limit", "10");
-                addParameter("page", page);
+                addParameter("limit", "5");
+                addParameter("page", index);
             }
         }, callback);
     }

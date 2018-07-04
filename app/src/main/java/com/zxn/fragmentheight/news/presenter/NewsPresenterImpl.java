@@ -10,20 +10,23 @@ public class NewsPresenterImpl implements INewsPresenter<List<ListInfo.DataBean>
 
     private INewsView mView;
     private final NewsModelImpl model;
+    private int index = 0;;
+    private boolean isDropDown;
 
     public NewsPresenterImpl(INewsView view) {
         mView = view;
         model = new NewsModelImpl(this);
     }
 
-
     @Override
-    public void loadData(int index) {
+    public void loadData(boolean isDropDown) {
+        this.isDropDown = isDropDown;
+        index++;
         model.loadData(index);
     }
 
     @Override
     public void onLoadData(List<ListInfo.DataBean> data) {
-        mView.onLoadData(data);
+        mView.onLoadData(data,isDropDown);
     }
 }
